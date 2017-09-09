@@ -165,7 +165,7 @@ public class DbmsRedshift extends DbmsJDBC {
         }
 
         // where clause using rand function
-        String whereClause = String.format("__rand < %d * %f / %d / _group_size",
+        String whereClause = String.format("__rand < %d * %f / %d / verdict_group_size",
                 originalTableSize,
                 param.getSamplingRatio(),
                 groupCount);
@@ -183,7 +183,7 @@ public class DbmsRedshift extends DbmsJDBC {
                 .withAlias("s")
                 .join(SingleRelation.from(vc, groupSizeTemp).withAlias("t"), joinExprs)
                 .where(whereClause)
-                .select(Joiner.on(", ").join(selectElems) + ", _group_size");
+                .select(Joiner.on(", ").join(selectElems) + ", verdict_group_size");
         String sql1 = String.format("create table %s as %s", sampledNoRand, sampled.toSql());
         VerdictLogger.debug(this, "The query used for creating a stratified sample without sampling probabilities.");
         VerdictLogger.debugPretty(this, Relation.prettyfySql(vc, sql1), "  ");
@@ -192,11 +192,11 @@ public class DbmsRedshift extends DbmsJDBC {
         // attach sampling probabilities and random partition number
         ExactRelation sampledGroupSize = SingleRelation.from(vc, sampledNoRand)
                 .groupby(param.columnNames)
-                .agg("count(*) AS _group_size_in_sample");
+                .agg("count(*) AS verdict_group_size_in_sample");
         ExactRelation withRand = SingleRelation.from(vc, sampledNoRand).withAlias("s")
                 .join(sampledGroupSize.withAlias("t"), joinExprs)
                 .select(Joiner.on(", ").join(selectElems)
-                        + String.format(", cast(_group_size_in_sample as float)  / cast(_group_size as float) as %s", samplingProbColName)
+                        + String.format(", cast(verdict_group_size_in_sample as float)  / cast(verdict_group_size as float) as %s", samplingProbColName)
                         + ", " + randomPartitionColumn());
         
         String parquetString="";

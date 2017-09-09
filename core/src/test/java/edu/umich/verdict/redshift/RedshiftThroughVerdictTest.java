@@ -46,11 +46,11 @@ public class RedshiftThroughVerdictTest {
 
 //      // ======== demo sample creation tpch ========  
         
-//	      startTime = System.currentTimeMillis();        
-//	      vc.executeJdbcQuery("create uniform sample of tpch100g_demo.orders_lineitem;");
-//	      endTime = System.currentTimeMillis();
-//	      System.out.println("\n\ncreate uniform sample of tpch100g_demo.orders_lineitem");
-//	      System.out.println("That took " + (endTime - startTime) + " milliseconds \n\n");
+	      startTime = System.currentTimeMillis();        
+	      vc.executeJdbcQuery("create uniform sample of tpch100g_demo.orders_lineitem;");
+	      endTime = System.currentTimeMillis();
+	      System.out.println("\n\ncreate uniform sample of tpch100g_demo.orders_lineitem");
+	      System.out.println("That took " + (endTime - startTime) + " milliseconds \n\n");
 	      
 	      startTime = System.currentTimeMillis();        
 	      vc.executeJdbcQuery("create stratified sample of tpch100g_demo.orders_lineitem on o_orderdate;");

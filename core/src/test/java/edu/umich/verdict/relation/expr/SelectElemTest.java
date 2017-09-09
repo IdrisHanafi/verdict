@@ -15,7 +15,7 @@ public class SelectElemTest {
 	
 	@Test
 	public void aliasTest() {
-		SelectElem e = SelectElem.from(dummyContext, "count(*) AS _group_size");
+		SelectElem e = SelectElem.from(dummyContext, "count(*) AS verdict_group_size");
 		System.out.println(e.toString());
 	}
 	
