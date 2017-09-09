@@ -32,7 +32,7 @@ public class RedshiftThroughVerdictTest {
         
         VerdictContext vc = VerdictJDBCContext.from(conf);        
         vc.executeJdbcQuery("set bypass=true");
-        vc.executeJdbcQuery("set search_path = tpch100g_demo");
+        vc.executeJdbcQuery("set search_path = tpch100g_demo, tpch100g_demo_verdict2");
 //        vc.executeJdbcQuery("set search_path = instacart100g, instacart100g_verdict2");
         vc.executeJdbcQuery("set bypass=false");
 
@@ -43,7 +43,20 @@ public class RedshiftThroughVerdictTest {
 //        System.out.println("\n\ndescribe instacart100g.departments;");
 //        System.out.println("That took " + (endTime - startTime) + " milliseconds \n\n");
 //        ResultSetConversion.printResultSet(rs);
+
+//      // ======== demo sample creation tpch ========  
         
+//	      startTime = System.currentTimeMillis();        
+//	      vc.executeJdbcQuery("create uniform sample of tpch100g_demo.orders_lineitem;");
+//	      endTime = System.currentTimeMillis();
+//	      System.out.println("\n\ncreate uniform sample of tpch100g_demo.orders_lineitem");
+//	      System.out.println("That took " + (endTime - startTime) + " milliseconds \n\n");
+	      
+	      startTime = System.currentTimeMillis();        
+	      vc.executeJdbcQuery("create stratified sample of tpch100g_demo.orders_lineitem on o_orderdate;");
+	      endTime = System.currentTimeMillis();
+	      System.out.println("\n\ncreate stratified sample of tpch100g_demo.orders_lineitem on o_orderdate;");
+	      System.out.println("That took " + (endTime - startTime) + " milliseconds \n\n");
         
 //        // ======== test sample creation tpch ========  
 //        
