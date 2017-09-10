@@ -11,7 +11,7 @@ import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SQLContext;
+import org.apache.spark.sql.SparkSession;
 
 import com.google.common.base.Joiner;
 
@@ -26,16 +26,16 @@ public class DbmsSpark extends Dbms {
 
     private static String DBNAME = "spark";
 
-    protected SQLContext sqlContext;
+    protected SparkSession spark;
 
     protected Dataset<Row> df;
 
     protected Set<TableUniqueName> cachedTable;
 
-    public DbmsSpark(VerdictContext vc, SQLContext sqlContext) throws VerdictException {	
+    public DbmsSpark(VerdictContext vc, SparkSession spark) throws VerdictException {	
         super(vc, DBNAME);
 
-        this.sqlContext = sqlContext;
+        this.spark = spark;
         this.cachedTable = new HashSet<TableUniqueName>();
     }
 
@@ -56,7 +56,7 @@ public class DbmsSpark extends Dbms {
 
     @Override
     public boolean execute(String sql) throws VerdictException {
-        df = sqlContext.sql(sql);
+        df = spark.sql(sql);
         return (df != null)? true : false;
         //return (df.count() > 0)? true : false;
     }
@@ -77,7 +77,7 @@ public class DbmsSpark extends Dbms {
     }
 
     public Dataset<Row> emptyDataFrame() {
-        return sqlContext.emptyDataFrame();
+        return spark.emptyDataFrame();
     }
 
     @Override
@@ -142,7 +142,7 @@ public class DbmsSpark extends Dbms {
     @Override
     public void cacheTable(TableUniqueName tableName) {
         if (vc.getConf().cacheSparkSamples() && !cachedTable.contains(tableName)) {
-            sqlContext.cacheTable(tableName.toString());
+            spark.catalog().cacheTable(tableName.toString());
             cachedTable.add(tableName);
         }
     }

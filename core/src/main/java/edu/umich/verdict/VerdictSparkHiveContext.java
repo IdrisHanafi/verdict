@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import org.apache.spark.SparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.hive.HiveContext;
+import org.apache.spark.sql.SparkSession;
 
 import edu.umich.verdict.dbms.DbmsSpark;
 import edu.umich.verdict.exceptions.VerdictException;
@@ -28,8 +28,8 @@ public class VerdictSparkHiveContext extends VerdictContext {
 	public VerdictSparkHiveContext(SparkContext sc, VerdictConf conf) throws VerdictException {
 		super(conf);
 		conf.setDbms("spark");
-		HiveContext sqlContext = new HiveContext(sc);
-		setDbms(new DbmsSpark(this, sqlContext));
+		SparkSession spark = new SparkSession(sc);
+		setDbms(new DbmsSpark(this, spark));
 		setMeta(new VerdictMeta(this));
 	}
 
