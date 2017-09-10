@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.spark.SparkContext;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.hive.HiveContext;
 import org.junit.runner.JUnitCore;
@@ -97,7 +97,7 @@ public class SparkAggregationIT extends AggregationIT {
 		System.out.println("Number of Failures: " + failureCount);
 	}
 
-	protected List<List<Object>> collectResult(DataFrame df) {
+	protected List<List<Object>> collectResult(Dataset<Row> df) {
 		List<List<Object>> result = new ArrayList<List<Object>>();
 		List<Row> rows = df.collectAsList();
 		for (Row row : rows) {

@@ -15,7 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
@@ -277,7 +278,7 @@ public abstract class DbmsJDBC extends Dbms {
     }
 
     @Override
-    public DataFrame getDataFrame() {
+    public Dataset<Row> getDataFrame() {
         return null;
     }
 

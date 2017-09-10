@@ -21,7 +21,8 @@ import java.sql.ResultSet;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Sets;
@@ -137,7 +138,7 @@ public abstract class VerdictContext {
 
     public abstract ResultSet getResultSet();
 
-    public abstract DataFrame getDataFrame();
+    public abstract Dataset<Row> getDataFrame();
 
     public ResultSet executeJdbcQuery(String sql) throws VerdictException {
         execute(sql);
@@ -145,14 +146,14 @@ public abstract class VerdictContext {
         return rs;
     }
 
-    public DataFrame executeSparkQuery(String sql) throws VerdictException {
+    public Dataset<Row> executeSparkQuery(String sql) throws VerdictException {
         execute(sql);
-        DataFrame df = getDataFrame();
+        Dataset<Row> df = getDataFrame();
         return df;
     }
 
-    public DataFrame sql(String sql) throws VerdictException {
-        DataFrame df = executeSparkQuery(sql);
+    public Dataset<Row> sql(String sql) throws VerdictException {
+        Dataset<Row> df = executeSparkQuery(sql);
         return df;
     }
 

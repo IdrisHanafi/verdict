@@ -3,7 +3,8 @@ package edu.umich.verdict;
 import java.sql.ResultSet;
 
 import org.apache.spark.SparkContext;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.hive.HiveContext;
 
 import edu.umich.verdict.dbms.DbmsSpark;
@@ -18,7 +19,7 @@ import edu.umich.verdict.util.VerdictLogger;
  */
 public class VerdictSparkHiveContext extends VerdictContext {
 	
-	private DataFrame df;
+	private Dataset<Row> df;
 
 	public VerdictSparkHiveContext(SparkContext sc) throws VerdictException {
 		this(sc, new VerdictConf());
@@ -47,7 +48,7 @@ public class VerdictSparkHiveContext extends VerdictContext {
 	}
 
 	@Override
-	public DataFrame getDataFrame() {
+	public Dataset<Row> getDataFrame() {
 		return df;
 	}
 }

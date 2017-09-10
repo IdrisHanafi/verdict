@@ -28,7 +28,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 
 import com.google.common.base.Joiner;
@@ -165,12 +165,12 @@ public abstract class Relation {
         return rs;
     }
 
-    public DataFrame collectDataFrame() throws VerdictException {
+    public Dataset<Row> collectDataFrame() throws VerdictException {
         String sql = toSql();
         VerdictLogger.debug(this, "A query to db: " + sql);
         VerdictLogger.debug(this, "A query to db:");
         VerdictLogger.debugPretty(this, Relation.prettyfySql(vc, sql), " ");
-        DataFrame df = vc.getDbms().executeSparkQuery(sql);
+        Dataset<Row> df = vc.getDbms().executeSparkQuery(sql);
         return df;
     }
 
@@ -193,7 +193,7 @@ public abstract class Relation {
             }
         }
         else if (vc.getDbms().isSpark()) {
-            DataFrame df = collectDataFrame();
+            Dataset<Row> df = collectDataFrame();
             List<Row> rows = df.collectAsList();
             for (Row r : rows) {
                 int size = r.size();

@@ -2,7 +2,8 @@ package edu.umich.verdict;
 
 import java.sql.ResultSet;
 
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 
 import com.google.common.base.Optional;
 
@@ -134,7 +135,7 @@ public class VerdictJDBCContext extends VerdictContext {
 	}
 
 	@Override
-	public DataFrame getDataFrame() {
+	public Dataset<Row> getDataFrame() {
 		return null;
 	}
 

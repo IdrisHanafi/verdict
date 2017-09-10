@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
 
@@ -28,7 +28,7 @@ public class DbmsSpark extends Dbms {
 
     protected SQLContext sqlContext;
 
-    protected DataFrame df;
+    protected Dataset<Row> df;
 
     protected Set<TableUniqueName> cachedTable;
 
@@ -39,18 +39,18 @@ public class DbmsSpark extends Dbms {
         this.cachedTable = new HashSet<TableUniqueName>();
     }
 
-    public DataFrame getDatabaseNamesInDataFrame() throws VerdictException {
-        DataFrame df = executeSparkQuery("show databases");
+    public Dataset<Row> getDatabaseNamesInDataFrame() throws VerdictException {
+        Dataset<Row> df = executeSparkQuery("show databases");
         return df;
     }
 
-    public DataFrame getTablesInDataFrame(String schemaName) throws VerdictException {
-        DataFrame df = executeSparkQuery("show tables in " + schemaName);
+    public Dataset<Row> getTablesInDataFrame(String schemaName) throws VerdictException {
+        Dataset<Row> df = executeSparkQuery("show tables in " + schemaName);
         return df;
     }
 
-    public DataFrame describeTableInDataFrame(TableUniqueName tableUniqueName)  throws VerdictException {
-        DataFrame df = executeSparkQuery(String.format("describe %s", tableUniqueName));
+    public Dataset<Row> describeTableInDataFrame(TableUniqueName tableUniqueName)  throws VerdictException {
+        Dataset<Row> df = executeSparkQuery(String.format("describe %s", tableUniqueName));
         return df;
     }
 
@@ -72,11 +72,11 @@ public class DbmsSpark extends Dbms {
     }
 
     @Override
-    public DataFrame getDataFrame() {
+    public Dataset<Row> getDataFrame() {
         return df;
     }
 
-    public DataFrame emptyDataFrame() {
+    public Dataset<Row> emptyDataFrame() {
         return sqlContext.emptyDataFrame();
     }
 
@@ -105,7 +105,7 @@ public class DbmsSpark extends Dbms {
     @Override
     public long getTableSize(TableUniqueName tableName) throws VerdictException {
         String sql = String.format("select count(*) from %s", tableName);
-        DataFrame df = executeSparkQuery(sql);
+        Dataset<Row> df = executeSparkQuery(sql);
         long size = df.collectAsList().get(0).getLong(0);
         return size;
     }

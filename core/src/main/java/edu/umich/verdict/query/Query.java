@@ -19,7 +19,8 @@ package edu.umich.verdict.query;
 
 import java.sql.ResultSet;
 
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 
 import edu.umich.verdict.VerdictContext;
 import edu.umich.verdict.datatypes.Alias;
@@ -44,7 +45,7 @@ public abstract class Query {
 
     protected ResultSet rs;
 
-    protected DataFrame df;
+    protected Dataset<Row> df;
 
 
     public enum Type {
@@ -106,7 +107,7 @@ public abstract class Query {
         return rs;
     }
 
-    public DataFrame getDataFrame() {
+    public Dataset<Row> getDataFrame() {
         if (df == null && (vc.getDbms() instanceof DbmsSpark)) {
             return ((DbmsSpark) vc.getDbms()).emptyDataFrame();
         } else {
@@ -120,9 +121,9 @@ public abstract class Query {
         return rs;
     }
 
-    public DataFrame computeDataFrame() throws VerdictException {
+    public Dataset<Row> computeDataFrame() throws VerdictException {
         compute();
-        DataFrame df = getDataFrame();
+        Dataset<Row> df = getDataFrame();
         return df;
     }
 

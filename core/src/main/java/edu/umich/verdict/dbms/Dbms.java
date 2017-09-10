@@ -26,7 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.spark.sql.DataFrame;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
@@ -163,9 +164,9 @@ public abstract class Dbms {
         return rs;
     }
 
-    public DataFrame executeSparkQuery(String sql) throws VerdictException {
+    public Dataset<Row> executeSparkQuery(String sql) throws VerdictException {
         execute(sql);
-        DataFrame rs = getDataFrame();
+        Dataset<Row> rs = getDataFrame();
         return rs;
     }
 
@@ -173,7 +174,7 @@ public abstract class Dbms {
 
     public abstract ResultSet getResultSet();
 
-    public abstract DataFrame getDataFrame();
+    public abstract Dataset<Row> getDataFrame();
 
     public abstract void executeUpdate(String sql) throws VerdictException;
 

@@ -150,19 +150,19 @@
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.10</artifactId>
-            <version>${spark.core.version}</version>
+            <version>2.2.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.10</artifactId>
-            <version>${spark.sql.version}</version>
+            <version>2.2.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-hive_2.10</artifactId>
-            <version>${spark.hive.version}</version>
+            <version>2.2.0</version>
             <scope>provided</scope>
         </dependency>
 
