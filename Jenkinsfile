@@ -17,7 +17,7 @@ pipeline {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true package'
             }
-        }        }
+        }
         stage('Test') {
             steps {
                 echo 'Testing..'
