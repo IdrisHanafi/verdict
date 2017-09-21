@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<scm>
-    		<connection>scm:git:ssh://github.com/verdictdb/verdict</connection>
-    		<developerConnection>scm:git:ssh://github.com/verdictdb/verdict</developerConnection>
-    		<url>https://github.com/verdictdb/verdict</url>
+		<connection>scm:git:ssh://github.com/verdictdb/verdict</connection>
+		<developerConnection>scm:git:ssh://github.com/verdictdb/verdict</developerConnection>
+		<url>https://github.com/verdictdb/verdict</url>
   	</scm>
   	
 	<properties>
@@ -30,7 +30,7 @@
 	<groupId>edu.umich.verdict</groupId>
 	<artifactId>verdictdb</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.0</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<name>VerdictDB</name>
 	<url>http://verdictdb.org</url>
 
@@ -60,7 +60,7 @@
         				<artifactId>maven-scm-plugin</artifactId>
         				<version>1.9.5</version>
         				<configuration>
-          				<connectionType>developerConnection</connectionType>
+          					<connectionType>developerConnection</connectionType>
         				</configuration>
 				</plugin>
 				<plugin>
