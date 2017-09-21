@@ -10,7 +10,7 @@
   	</scm>
 
 	<properties>
-		<verdict.version>0.3.0</verdict.version>
+		<verdict.version>0.3.0-SNAPSHOT</verdict.version>
 		<antlr4.visitor>true</antlr4.visitor>
 		<antlr4.version>4.5.3</antlr4.version>
 		<apache.commons.version>3.5</apache.commons.version>
