@@ -57,6 +57,14 @@
 			<plugins>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+        				<artifactId>maven-scm-plugin</artifactId>
+        				<version>1.9.5</version>
+        				<configuration>
+          				<connectionType>developerConnection</connectionType>
+        				</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 				</plugin>
 				<plugin>
