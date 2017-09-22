@@ -8,7 +8,7 @@ node {
   }
  
   
-  def mvnHome = tool 'maven-3.5.0'
+  def mvnHome = tool 'mvn-3.0.5'
   // we want to pick up the version from the pom
   def pom = readMavenPom file: 'pom.xml'
   def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
