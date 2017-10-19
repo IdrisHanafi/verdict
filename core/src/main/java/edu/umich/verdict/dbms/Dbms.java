@@ -145,7 +145,7 @@ public abstract class Dbms {
     }
 
     public ResultSet executeJdbcQuery(String sql) throws VerdictException {
-        execute(sql);
+	    execute(sql);
         ResultSet rs = getResultSet();
         return rs;
     }

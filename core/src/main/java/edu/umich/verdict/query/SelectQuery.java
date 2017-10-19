@@ -56,6 +56,8 @@ public class SelectQuery extends Query {
         super.compute();
         Relation r = queryToRelation(vc, queryString);
         setResultsFromRelation(r);
+
+
     }
 
 }

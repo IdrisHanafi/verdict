@@ -43,8 +43,8 @@ public class HiveBasicTest extends BasicTest {
         conf.setDbms("hive2");
         conf.setHost(host);
         conf.setPort(port);
-        conf.setDbmsSchema(schema);
-        conf.set("no_user_password","true");
+        //conf.setDbmsSchema(schema);
+        //conf.set("no_user_password","true");
         vc = VerdictJDBCContext.from(conf);
 
     }

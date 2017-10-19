@@ -73,6 +73,7 @@ public abstract class ExactRelation extends Relation {
     public static ExactRelation from(VerdictContext vc, String sql) {
         VerdictSQLParser p = StringManipulations.parserOf(sql);
         RelationGen g = new RelationGen(vc);
+
         return g.visit(p.select_statement());
     }
 
